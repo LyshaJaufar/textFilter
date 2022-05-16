@@ -1,6 +1,9 @@
 package filter;
 
 import java.awt.Color;
+import java.awt.Font;
+import java.awt.Graphics;
+import java.awt.RenderingHints;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -18,7 +21,7 @@ public class Gray {
 		try {
 			File input = new File("C:\\Users\\Admin\\eclipse-workspace\\filter\\src\\filter\\test.png");
 			File temp = new File("C:\\Users\\Admin\\eclipse-workspace\\filter\\src\\filter\\temp.jpg");
-			File output = new File("C:\\Users\\Admin\\eclipse-workspace\\filter\\src\\filter\\Output4.jpg");
+			File output = new File("C:\\Users\\Admin\\eclipse-workspace\\filter\\src\\filter\\Output1.jpg");
 			
 			ImageInputStream imgInputStream = ImageIO.createImageInputStream(input);
 			Iterator<ImageReader> iterator = ImageIO.getImageReaders(imgInputStream);
@@ -32,6 +35,7 @@ public class Gray {
 			
 			ArrayList<Color> finalRGB = new ArrayList<Color>();
 			int count = 0;
+			int spacing = 9;
 
 		    //Graph for sobel operator
 		    int[][] graph = { 
@@ -39,12 +43,15 @@ public class Gray {
 		        {-2, 0, 2},
 		        {-1, 0, 1}
 		    };
+		    
+			Font font = new Font("Arial", Font.PLAIN, 4);
 			
 			for (int i = 0; i < height; i++) {
 				for (int j = 0; j < width; j++) {
 					float gxBlue = 0, gxGreen = 0, gxRed = 0;
 					float gyBlue = 0, gyGreen = 0, gyRed = 0;
-					
+					float finalRed = 0, finalBlue = 0, finalGreen = 0;
+
 					for (int i_offset = -1; i_offset <= 1; i_offset++) {
 						for (int j_offset = -1; j_offset <= 1; j_offset++) {
 		                    if (i + i_offset < 0 || i + i_offset > height - 1 || j + j_offset < 0 || j + j_offset > width - 1) {
@@ -62,32 +69,51 @@ public class Gray {
 		                    gyGreen += new Color(image.getRGB(j + j_offset, i + i_offset)).getBlue() * graph[i_offset + 1][j_offset + 1];
 						}
 					}
-					
-					// Compute new total value of each pixel
-					float finalRed = (float)Math.floor(Math.sqrt((gxRed * gxRed) + (gyRed * gyRed)));
-					float finalBlue = (float)Math.floor(Math.sqrt((gxBlue * gxBlue) + (gyBlue * gyBlue)));
-					float finalGreen = (float)Math.floor(Math.sqrt((gxGreen * gxGreen) + (gyGreen * gyGreen)));
+					if (gxRed == 0 && gxGreen == 0 && gxBlue == 0 && gyRed == 0 && gyBlue == 0 && gyGreen == 0) {
+						finalRed = 255;																													
+						finalBlue = 255;
+						finalGreen = 255;
+
+					} else {
+						// Compute new total value of each pixel
+						finalRed = (float)Math.floor(Math.sqrt((gxRed * gxRed) + (gyRed * gyRed)));
+						finalBlue = (float)Math.floor(Math.sqrt((gxBlue * gxBlue) + (gyBlue * gyBlue)));
+						finalGreen = (float)Math.floor(Math.sqrt((gxGreen * gxGreen) + (gyGreen * gyGreen)));
+					}
+						
+
 					
 					// Ensure the new value is 0 - 255 & set each colour values of a pixel to the result 
 					int rgbRed = (int)((finalRed > 255) ? 255 : finalRed);
 					int rgbGreen = (int)((finalGreen > 255) ? 255 : finalGreen);
 					int rgbBlue = (int)((finalBlue > 255) ? 255 : finalBlue);
 
+
 					finalRGB.add(new Color(rgbRed, rgbGreen, rgbBlue));
 					count++;
-
 				}
 			}
-			//System.out.println("test: " + finalRGB);
 			count = 0;
 			for (int i = 0; i < height; i++) {
 				for (int j = 0; j < width; j++) {
+					
+					if (spacing % 50 == 0 && finalRGB.get(count).getRed() == 255 && finalRGB.get(count).getGreen() == 255 && finalRGB.get(count).getBlue() == 255) {
+						Graphics g = image.getGraphics();
+						g.setFont(font);
+						g.setColor(Color.GREEN);
+						g.drawString("hello world", j, i);
+						System.out.println("test 12");
+					}
+
+					
 					image.setRGB(j, i, finalRGB.get(count).getRGB());
 					count++;
+					spacing++;
 				}
 			}
+
 			
-			ImageIO.write(image, imageFormat, temp);
+			ImageIO.write(image, imageFormat, output);
 			System.out.println("Completed.");
 		}
 		catch (IOException ex) {
