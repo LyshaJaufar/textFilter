@@ -19,7 +19,7 @@ public class Gray {
 
 	public static void main(String[] args) {
 		try {
-			File input = new File("C:\\Users\\Admin\\eclipse-workspace\\filter\\src\\filter\\test.png");
+			File input = new File("C:\\Users\\Admin\\eclipse-workspace\\filter\\src\\filter\\ratioedAayan.jpg");
 			File temp = new File("C:\\Users\\Admin\\eclipse-workspace\\filter\\src\\filter\\temp.jpg");
 			File output = new File("C:\\Users\\Admin\\eclipse-workspace\\filter\\src\\filter\\Output1.jpg");
 			
@@ -44,7 +44,7 @@ public class Gray {
 		        {-1, 0, 1}
 		    };
 		    
-			Font font = new Font("Arial", Font.PLAIN, 4);
+			Font font = new Font("Arial", Font.PLAIN, 12);
 			
 			for (int i = 0; i < height; i++) {
 				for (int j = 0; j < width; j++) {
@@ -97,16 +97,22 @@ public class Gray {
 			for (int i = 0; i < height; i++) {
 				for (int j = 0; j < width; j++) {
 					
+					
 					if (spacing % 50 == 0 && finalRGB.get(count).getRed() == 255 && finalRGB.get(count).getGreen() == 255 && finalRGB.get(count).getBlue() == 255) {
 						Graphics g = image.getGraphics();
 						g.setFont(font);
 						g.setColor(Color.GREEN);
-						g.drawString("hello world", j, i);
-						System.out.println("test 12");
+						g.drawString("h", j, i);
+					} 
+					if (finalRGB.get(count).getRed() == 255 && finalRGB.get(count).getGreen() == 255 && finalRGB.get(count).getBlue() == 255) {
+						image.setRGB(j, i, Color.BLACK.getRGB());
+					}
+					else {
+						image.setRGB(j, i, finalRGB.get(count).getRGB());
 					}
 
 					
-					image.setRGB(j, i, finalRGB.get(count).getRGB());
+					
 					count++;
 					spacing++;
 				}
