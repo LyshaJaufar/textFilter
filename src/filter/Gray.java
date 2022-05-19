@@ -8,6 +8,7 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Hashtable;
 import java.util.Iterator;
 
 import javax.imageio.ImageIO;
@@ -21,7 +22,7 @@ public class Gray {
 		try {
 			File input = new File("C:\\Users\\Admin\\eclipse-workspace\\filter\\src\\filter\\ratioedAayan.jpg");
 			File temp = new File("C:\\Users\\Admin\\eclipse-workspace\\filter\\src\\filter\\temp.jpg");
-			File output = new File("C:\\Users\\Admin\\eclipse-workspace\\filter\\src\\filter\\Output1.jpg");
+			File output = new File("C:\\Users\\Admin\\eclipse-workspace\\filter\\src\\filter\\Output8.jpg");
 			
 			ImageInputStream imgInputStream = ImageIO.createImageInputStream(input);
 			Iterator<ImageReader> iterator = ImageIO.getImageReaders(imgInputStream);
@@ -33,7 +34,9 @@ public class Gray {
 			int width = image.getWidth();
 			int height = image.getHeight();
 			
-			ArrayList<Color> finalRGB = new ArrayList<Color>();
+			//ArrayList<Color> finalRGB = new ArrayList<Color>();
+			Hashtable<Integer, Color>[] finalRGB = new Hashtable[height];
+
 			int count = 0;
 			int spacing = 9;
 
@@ -47,6 +50,8 @@ public class Gray {
 			Font font = new Font("Arial", Font.PLAIN, 12);
 			
 			for (int i = 0; i < height; i++) {
+				finalRGB[i] = new Hashtable<Integer, Color>();
+				
 				for (int j = 0; j < width; j++) {
 					float gxBlue = 0, gxGreen = 0, gxRed = 0;
 					float gyBlue = 0, gyGreen = 0, gyRed = 0;
@@ -89,35 +94,33 @@ public class Gray {
 					int rgbBlue = (int)((finalBlue > 255) ? 255 : finalBlue);
 
 
-					finalRGB.add(new Color(rgbRed, rgbGreen, rgbBlue));
+					finalRGB[i].put(j, new Color(rgbRed, rgbGreen, rgbBlue));
 					count++;
 				}
 			}
+
 			count = 0;
 			for (int i = 0; i < height; i++) {
 				for (int j = 0; j < width; j++) {
-					
-					
-					if (spacing % 50 == 0 && finalRGB.get(count).getRed() == 255 && finalRGB.get(count).getGreen() == 255 && finalRGB.get(count).getBlue() == 255) {
-						Graphics g = image.getGraphics();
-						g.setFont(font);
-						g.setColor(Color.GREEN);
-						g.drawString("h", j, i);
-					} 
-					if (finalRGB.get(count).getRed() == 255 && finalRGB.get(count).getGreen() == 255 && finalRGB.get(count).getBlue() == 255) {
-						image.setRGB(j, i, Color.BLACK.getRGB());
-					}
-					else {
-						image.setRGB(j, i, finalRGB.get(count).getRGB());
-					}
-
-					
-					
-					count++;
-					spacing++;
+					image.setRGB(j, i, Color.BLACK.getRGB());
 				}
 			}
 
+			for (int i = 0; i < height; i++) {
+				for (int j = 0; j < width; j++) {
+					if (j + (j * 8) < width && i + (i * 8) < height) {
+
+						if (finalRGB[i + (i * 8)].get(j + (j * 8)).getRed() == 255 && finalRGB[i + (i * 8)].get(j + (j * 8)).getGreen() == 255 &&
+								finalRGB[i + (i * 8)].get(j + (j * 8)).getBlue() == 255) {
+							Graphics g = image.getGraphics();
+							g.setFont(font);
+							g.setColor(Color.GREEN);
+							g.drawString("h", j + (j * 8), i + (i * 8));
+							image.setRGB(j + (j * 8), i + (i * 8), Color.BLACK.getRGB());
+						} 
+					}
+				}
+			}
 			
 			ImageIO.write(image, imageFormat, output);
 			System.out.println("Completed.");
