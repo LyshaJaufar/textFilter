@@ -1,4 +1,3 @@
-module filter {
+module textFilter {
 	requires java.desktop;
-	requires java.base;
 }
