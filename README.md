@@ -1,4 +1,4 @@
-# filter
+# Text Filter
 Generates an image out of the script from the Shrek movie. True art.
 
 # What I Learnt
