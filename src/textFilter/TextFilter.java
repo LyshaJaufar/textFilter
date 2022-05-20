@@ -23,12 +23,16 @@ public class TextFilter {
 	public static void main(String[] args) {
 		try {
 			
-			// Output image file name
+			// Get input image
 			Scanner scanner = new Scanner(System.in);
+			System.out.println("Enter file name of input image: ");
+			String inputImage = scanner.next();
+			
+			// Output image file name
 			System.out.println("Enter file name of output image: ");
 			String outputFileName = scanner.next();
-			
-			File input = new File("C:\\Users\\Admin\\eclipse-workspace\\textFilter\\src\\textFilter\\endgame.jpg");
+						
+			File input = new File("C:\\Users\\Admin\\eclipse-workspace\\textFilter\\src\\textFilter\\" + inputImage);
 			File output = new File("C:\\Users\\Admin\\eclipse-workspace\\textFilter\\src\\textFilter\\" + outputFileName + ".jpg");
 			
 			// Input image
