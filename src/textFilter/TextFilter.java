@@ -32,8 +32,8 @@ public class TextFilter {
 			System.out.println("Enter file name of output image: ");
 			String outputFileName = scanner.next();
 						
-			File input = new File("C:\\Users\\Admin\\eclipse-workspace\\textFilter\\src\\textFilter\\" + inputImage);
-			File output = new File("C:\\Users\\Admin\\eclipse-workspace\\textFilter\\src\\textFilter\\" + outputFileName + ".jpg");
+			File input = new File("C:\\Users\\Admin\\eclipse-workspace\\textFilter\\src\\textFilter\\images\\" + inputImage);
+			File output = new File("C:\\Users\\Admin\\eclipse-workspace\\textFilter\\src\\textFilter\\images\\" + outputFileName + ".jpg");
 			
 			// Input image
 			ImageInputStream imgInputStream = ImageIO.createImageInputStream(input);
