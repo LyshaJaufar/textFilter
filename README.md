@@ -5,7 +5,7 @@ Generates an image out of the script from the Shrek movie. True art.
 * Reading from files
 * Pixel manipulation
 
-# Art
+# Art (Screenshots)
 ![TheGreatWave](https://user-images.githubusercontent.com/63420202/169604688-b3fc93da-47b4-44d2-9352-83d6f9de5ee2.jpg)
 ![TheScream](https://user-images.githubusercontent.com/63420202/169604728-823a7070-f8dc-48b7-8c91-182232dc1650.jpg)
 ![MonaLisa](https://user-images.githubusercontent.com/63420202/169604734-a748359f-a7e3-4d7a-aff9-b56430d68800.jpg)
