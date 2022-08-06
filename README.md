@@ -6,6 +6,8 @@ Generates an image out of the script from the Shrek movie. True art.
 * Pixel manipulation
 
 # Art (Screenshots)
+| First Header  | Second Header |
+| ------------- | ------------- |
 | <img src="https://user-images.githubusercontent.com/63420202/169604688-b3fc93da-47b4-44d2-9352-83d6f9de5ee2.jpg" style="width: 50%; ">  | <img src="https://user-images.githubusercontent.com/63420202/169604805-7bc447cf-1e98-4ac0-8456-770d48cc395f.jpg" style="width: 50%; "> |
 | <img src="https://user-images.githubusercontent.com/63420202/169604728-823a7070-f8dc-48b7-8c91-182232dc1650.jpg" style="width: 50%; ">  | <img src="https://user-images.githubusercontent.com/63420202/169604734-a748359f-a7e3-4d7a-aff9-b56430d68800.jpg" style="width: 50%; "> |
 | <img src="https://user-images.githubusercontent.com/63420202/169604728-823a7070-f8dc-48b7-8c91-182232dc1650.jpg" style="width: 50%; ">  | <img src="https://user-images.githubusercontent.com/63420202/169604734-a748359f-a7e3-4d7a-aff9-b56430d68800.jpg" style="width: 50%; "> |
