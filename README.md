@@ -36,3 +36,4 @@ Generates an image out of the script from the Shrek movie. True art.
 <p align="center">
 <img src="https://user-images.githubusercontent.com/63420202/169604765-ce1facc4-31e0-4d0b-a262-d0abc17832a9.jpg" style="width: 50%;display: block;margin-left: auto; margin-right: auto;">
 </p>
+
